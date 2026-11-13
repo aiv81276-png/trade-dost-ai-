@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trade Dost AI</title>
+<style>
+body{margin:0;background:#101827;color:white;font-family:Arial;padding:20px}
+.box{max-width:450px;margin:30px auto;background:#1e293b;padding:22px;border-radius:15px}
+h1{color:#38bdf8;text-align:center}
+p{text-align:center;color:#cbd5e1}
+input,button{width:100%;padding:14px;margin-top:15px;box-sizing:border-box;border-radius:9px}
+button{background:#0ea5e9;color:white;border:0;font-size:17px}
+img{width:100%;margin-top:15px;border-radius:10px}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>📈 Trade Dost AI</h1>
+<p>Apna trading chart upload karein</p>
+<input type="file" id="chart" accept="image/*">
+<img id="preview" hidden>
+<button onclick="showChart()">Chart Dekhein</button>
+<p id="result">Aapka chart yahan dikhega.</p>
+</div>
+<script>
+function showChart(){
+const file=document.getElementById('chart').files[0];
+if(!file){document.getElementById('result').innerText='Pehle chart upload karein.';return;}
+const img=document.getElementById('preview');
+img.src=URL.createObjectURL(file);
+img.hidden=false;
+document.getElementById('result').innerText='Chart upload ho gaya. AI analysis backend baad mein jodega.';
+}
+</script>
+</body>
+</html>
