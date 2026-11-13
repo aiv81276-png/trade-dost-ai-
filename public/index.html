@@ -1,1 +1,43 @@
-
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trade Dost AI</title>
+<style>
+body{margin:0;background:#101827;color:white;font-family:Arial;padding:20px}
+.box{max-width:450px;margin:30px auto;background:#1e293b;padding:22px;border-radius:15px}
+h1{color:#38bdf8;text-align:center}
+p{text-align:center;color:#cbd5e1}
+input,button{width:100%;padding:14px;margin-top:15px;box-sizing:border-box;border-radius:9px}
+button{background:#0ea5e9;color:white;border:0;font-size:17px}
+#result{white-space:pre-wrap;margin-top:20px;color:#a7f3d0}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>📈 Trade Dost AI</h1>
+<p>Apna trading chart upload karein</p>
+<input type="file" id="chart" accept="image/*">
+<button onclick="analyze()">Chart Analysis Karein</button>
+<div id="result"></div>
+</div>
+<script>
+async function analyze(){
+const file=document.getElementById('chart').files[0];
+const result=document.getElementById('result');
+if(!file){result.innerText='Pehle chart ki photo chunein.';return;}
+result.innerText='Analysis ho raha hai...';
+const data=new FormData();
+data.append('chart',file);
+try{
+const response=await fetch('/api/analyze',{method:'POST',body:data});
+const answer=await response.json();
+result.innerText=answer.analysis||answer.error||JSON.stringify(answer);
+}catch(e){
+result.innerText='Server se connection nahi ho paya.';
+}
+}
+</script>
+</body>
+</html> 
